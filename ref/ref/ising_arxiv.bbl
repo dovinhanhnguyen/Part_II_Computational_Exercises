@@ -1,0 +1,56 @@
+\begin{thebibliography}{10}
+
+\bibitem{Yeomans}
+{\em Statistical Mechanics of Phase Transitions}.
+\newblock Clarendon Press, Oxford, 1992.
+
+\bibitem{Binder}
+K.~Binder and D.W. Heermann.
+\newblock {\em Monte Carlo Simulation in Statistical Physics}.
+\newblock Springer, Berlin, 1997.
+
+\bibitem{Cardy}
+John Cardy.
+\newblock {\em Scaling and Renormalization in Statistical Physics}.
+\newblock Cambridge University Press, London, 1999.
+
+\bibitem{Landau:76}
+D.P.Landau.
+\newblock Finite-size behavior of the ising square lattice.
+\newblock {\em Physical Review B}, 13(7):2997--3011, 1 April 1976.
+
+\bibitem{Giordano}
+N.J. Giordano.
+\newblock {\em Computation Physics}.
+\newblock Prentice Hall, New Jersey, 1997.
+
+\bibitem{Hoffmann}
+K.H. Hoffmann and M.~Schreiber.
+\newblock {\em Computation Physics}.
+\newblock Springer, Berlin, 1996.
+
+\bibitem{Kinzel}
+W.~Kinzel and G.~Reents.
+\newblock {\em Physics by Computer}.
+\newblock Springer, Berlin, 1998.
+
+\bibitem{Metropolis:53}
+N.~Metropolis, A.W. Rosenbluth, M.N. Rosenbluth, A.H. Teller, and E.~Teller.
+\newblock {\em Journal of Chemical Physics}, 1953.
+
+\bibitem{NumRecipe}
+W.H. Press, S.A. Teukolsky, W.T. Vetterling, and B.P. Flannery.
+\newblock {\em Numerical Recipes in C}.
+\newblock Cambridge University Press, Cambridge, 1992.
+
+\bibitem{Reichel}
+L.E. Reichel.
+\newblock {\em A Modern Course in Statistical Physics}.
+\newblock University of Texas Press, Austin, 1980.
+
+\bibitem{Swendsen:87}
+Robert~H. Swendsen and Jian-Sheng Wang.
+\newblock Nonuniversal critical dynamics in monte carlo simulations.
+\newblock {\em Physical Review Letters}, 58(2):86--88, 12 January 1987.
+
+\end{thebibliography}

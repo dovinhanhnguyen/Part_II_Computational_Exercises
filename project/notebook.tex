@@ -1,0 +1,591 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{project-dvan2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Import modules}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{optimize}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Class representing a 2D Ising model}
+        \PY{k}{class} \PY{n+nc}{Ising}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{N}\PY{p}{,} \PY{n}{J}\PY{p}{,} \PY{n}{H}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lattice} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{N}\PY{p}{,}\PY{n}{N}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} initial state}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{N} \PY{o}{=} \PY{n}{N} \PY{c+c1}{\PYZsh{} dimension}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{J} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{J}\PY{p}{)} \PY{c+c1}{\PYZsh{} interaction energy, non\PYZhy{}negative by definition}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{H} \PY{o}{=} \PY{n}{H} \PY{c+c1}{\PYZsh{} external field}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Function to calculate energy change when spin(i,j) is flipped, assuming periodic boundary conditions}
+        \PY{k}{def} \PY{n+nf}{energy\PYZus{}change\PYZus{}of\PYZus{}flip}\PY{p}{(}\PY{n}{state}\PY{p}{,} \PY{n}{pos\PYZus{}i}\PY{p}{,} \PY{n}{pos\PYZus{}j}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{state}\PY{o}{.}\PY{n}{lattice}\PY{p}{[}\PY{n}{pos\PYZus{}i}\PY{p}{,}\PY{n}{pos\PYZus{}j}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{J}\PY{o}{*}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{lattice}\PY{p}{[}\PY{n}{pos\PYZus{}i}\PY{p}{,}\PY{p}{(}\PY{n}{pos\PYZus{}j}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{\PYZpc{}}\PY{k}{state}.N] + state.lattice[(pos\PYZus{}i\PYZhy{}1)\PYZpc{}state.N,pos\PYZus{}j] + state.lattice[(pos\PYZus{}i+1)\PYZpc{}state.N,pos\PYZus{}j] + state.lattice[pos\PYZus{}i,(pos\PYZus{}j\PYZhy{}1)\PYZpc{}state.N])+state.H)
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Monte Carlo sweep using Metropolis algorithm}
+        \PY{k}{def} \PY{n+nf}{monte\PYZus{}carlo\PYZus{}sweep}\PY{p}{(}\PY{n}{state}\PY{p}{,} \PY{n}{temperature}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{lattice}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} pick a spin randomly and calculate energy change if it\PYZsq{}s flipped}
+                \PY{n}{pos\PYZus{}i} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{lattice}\PY{p}{)}\PY{p}{)}
+                \PY{n}{pos\PYZus{}j} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{lattice}\PY{p}{)}\PY{p}{)}
+                \PY{n}{delta\PYZus{}E} \PY{o}{=} \PY{n}{energy\PYZus{}change\PYZus{}of\PYZus{}flip}\PY{p}{(}\PY{n}{state}\PY{p}{,}\PY{n}{pos\PYZus{}i}\PY{p}{,}\PY{n}{pos\PYZus{}j}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{} to flip or not to flip?}
+                \PY{k}{if} \PY{n}{delta\PYZus{}E} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0} \PY{o+ow}{or} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{delta\PYZus{}E}\PY{o}{/}\PY{n}{temperature}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{state}\PY{o}{.}\PY{n}{lattice}\PY{p}{[}\PY{n}{pos\PYZus{}i}\PY{p}{,}\PY{n}{pos\PYZus{}j}\PY{p}{]} \PY{o}{*}\PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Function to calculate magnetisation}
+        \PY{k}{def} \PY{n+nf}{calculate\PYZus{}magnetisation}\PY{p}{(}\PY{n}{state}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{lattice}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Function to calculate energy}
+        \PY{k}{def} \PY{n+nf}{calculate\PYZus{}energy}\PY{p}{(}\PY{n}{state}\PY{p}{)}\PY{p}{:}
+            \PY{n}{interaction\PYZus{}energy} \PY{o}{=} \PY{l+m+mf}{0.0}
+            \PY{k}{for} \PY{n}{pos\PYZus{}i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{lattice}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{pos\PYZus{}j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{lattice}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{interaction\PYZus{}energy} \PY{o}{+}\PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{state}\PY{o}{.}\PY{n}{J}\PY{o}{*}\PY{n}{state}\PY{o}{.}\PY{n}{lattice}\PY{p}{[}\PY{n}{pos\PYZus{}i}\PY{p}{,}\PY{n}{pos\PYZus{}j}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{state}\PY{o}{.}\PY{n}{lattice}\PY{p}{[}\PY{n}{pos\PYZus{}i}\PY{p}{,}\PY{p}{(}\PY{n}{pos\PYZus{}j}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{\PYZpc{}}\PY{k}{state}.N] + state.lattice[(pos\PYZus{}i\PYZhy{}1)\PYZpc{}state.N,pos\PYZus{}j] + state.lattice[(pos\PYZus{}i+1)\PYZpc{}state.N,pos\PYZus{}j] + state.lattice[pos\PYZus{}i,(pos\PYZus{}j\PYZhy{}1)\PYZpc{}state.N])
+            \PY{n}{interaction\PYZus{}energy} \PY{o}{*}\PY{o}{=} \PY{l+m+mf}{0.5} \PY{c+c1}{\PYZsh{} avoid double counting}
+            
+            \PY{n}{magnetisation\PYZus{}energy} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{state}\PY{o}{.}\PY{n}{H}\PY{o}{*}\PY{n}{calculate\PYZus{}magnetisation}\PY{p}{(}\PY{n}{state}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{interaction\PYZus{}energy}\PY{o}{+}\PY{n}{magnetisation\PYZus{}energy}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Function to normalize data by number of lattice sites}
+        \PY{k}{def} \PY{n+nf}{normalize\PYZus{}data}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{N}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{data}\PY{o}{/}\PY{p}{(}\PY{n}{N}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Metropolis algorithm}
+        \PY{k}{def} \PY{n+nf}{Metropolis\PYZus{}algorithm}\PY{p}{(}\PY{n}{N\PYZus{}range}\PY{p}{,} \PY{n}{J}\PY{p}{,} \PY{n}{H}\PY{p}{,} \PY{n}{T\PYZus{}range}\PY{p}{,} \PY{n}{no\PYZus{}of\PYZus{}sweeps}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} arrays to store magnetisation and energy time series}
+            \PY{n}{M} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{N\PYZus{}range}\PY{p}{)}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{T\PYZus{}range}\PY{p}{)}\PY{p}{,}\PY{n}{no\PYZus{}of\PYZus{}sweeps}\PY{p}{)}\PY{p}{)}
+            \PY{n}{E} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{N\PYZus{}range}\PY{p}{)}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{T\PYZus{}range}\PY{p}{)}\PY{p}{,}\PY{n}{no\PYZus{}of\PYZus{}sweeps}\PY{p}{)}\PY{p}{)}
+            \PY{n}{M\PYZus{}normalized} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{N\PYZus{}range}\PY{p}{)}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{T\PYZus{}range}\PY{p}{)}\PY{p}{,}\PY{n}{no\PYZus{}of\PYZus{}sweeps}\PY{p}{)}\PY{p}{)}
+            \PY{n}{E\PYZus{}normalized} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{N\PYZus{}range}\PY{p}{)}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{T\PYZus{}range}\PY{p}{)}\PY{p}{,}\PY{n}{no\PYZus{}of\PYZus{}sweeps}\PY{p}{)}\PY{p}{)}
+            \PY{n}{run\PYZus{}time} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{N\PYZus{}range}\PY{p}{)}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{T\PYZus{}range}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Monte Carlo sweeps}
+            \PY{k}{for} \PY{n}{N\PYZus{}index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{N\PYZus{}range}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{T\PYZus{}index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{T\PYZus{}range}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{state} \PY{o}{=} \PY{n}{Ising}\PY{p}{(}\PY{n}{N\PYZus{}range}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{]}\PY{p}{,}\PY{n}{J}\PY{p}{,}\PY{n}{H}\PY{p}{)}
+                    
+                    \PY{k}{for} \PY{n}{sweep} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{no\PYZus{}of\PYZus{}sweeps}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} run!}
+                        \PY{n}{monte\PYZus{}carlo\PYZus{}sweep}\PY{p}{(}\PY{n}{state}\PY{p}{,}\PY{n}{T\PYZus{}range}\PY{p}{[}\PY{n}{T\PYZus{}index}\PY{p}{]}\PY{p}{)}
+                        
+                        \PY{n}{M}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{n}{sweep}\PY{p}{]} \PY{o}{=} \PY{n}{calculate\PYZus{}magnetisation}\PY{p}{(}\PY{n}{state}\PY{p}{)}
+                        \PY{n}{E}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{n}{sweep}\PY{p}{]} \PY{o}{=} \PY{n}{calculate\PYZus{}energy}\PY{p}{(}\PY{n}{state}\PY{p}{)}
+                        \PY{n}{M\PYZus{}normalized}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{n}{sweep}\PY{p}{]} \PY{o}{=} \PY{n}{normalize\PYZus{}data}\PY{p}{(}\PY{n}{M}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{n}{sweep}\PY{p}{]}\PY{p}{,}\PY{n}{state}\PY{o}{.}\PY{n}{N}\PY{p}{)}
+                        \PY{n}{E\PYZus{}normalized}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{n}{sweep}\PY{p}{]} \PY{o}{=} \PY{n}{normalize\PYZus{}data}\PY{p}{(}\PY{n}{E}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{n}{sweep}\PY{p}{]}\PY{p}{,}\PY{n}{state}\PY{o}{.}\PY{n}{N}\PY{p}{)}
+                        
+                        \PY{k}{if} \PY{n}{sweep}\PY{o}{\PYZpc{}}\PY{k}{1000} == 0: \PYZsh{} output checkpoints
+                            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{N = }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{, T = }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{, sweep = }\PY{l+s+si}{\PYZob{}2\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{N\PYZus{}range}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{]}\PY{p}{,}\PY{n}{T\PYZus{}range}\PY{p}{[}\PY{n}{T\PYZus{}index}\PY{p}{]}\PY{p}{,}\PY{n}{sweep}\PY{p}{)}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{M}\PY{p}{,} \PY{n}{E}\PY{p}{,} \PY{n}{M\PYZus{}normalized}\PY{p}{,} \PY{n}{E\PYZus{}normalized}\PY{p}{,} \PY{n}{run\PYZus{}time}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Function to plot evolution of data over time}
+        \PY{k}{def} \PY{n+nf}{plot\PYZus{}time\PYZus{}series}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{N\PYZus{}range}\PY{p}{,} \PY{n}{N\PYZus{}index\PYZus{}range}\PY{p}{,} \PY{n}{T\PYZus{}range}\PY{p}{,} \PY{n}{T\PYZus{}index\PYZus{}range}\PY{p}{,} \PY{n}{start\PYZus{}point}\PY{p}{,} \PY{n}{stop\PYZus{}point}\PY{p}{,} \PY{n}{xname}\PY{p}{,} \PY{n}{yname}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{N\PYZus{}index} \PY{o+ow}{in} \PY{n}{N\PYZus{}index\PYZus{}range}\PY{p}{:}
+                \PY{k}{for} \PY{n}{T\PYZus{}index} \PY{o+ow}{in} \PY{n}{T\PYZus{}index\PYZus{}range}\PY{p}{:}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{start\PYZus{}point}\PY{p}{,}\PY{n}{stop\PYZus{}point}\PY{p}{)}\PY{p}{,}\PY{n}{data}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{n}{start\PYZus{}point}\PY{p}{:}\PY{n}{stop\PYZus{}point}\PY{p}{]}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{N = }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{, T = }\PY{l+s+si}{\PYZob{}1:.3f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{N\PYZus{}range}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{]}\PY{p}{,}\PY{n}{T\PYZus{}range}\PY{p}{[}\PY{n}{T\PYZus{}index}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{xname}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{n}{yname}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{plots/}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{ vs }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{ N = }\PY{l+s+si}{\PYZob{}2\PYZcb{}}\PY{l+s+s1}{ from }\PY{l+s+si}{\PYZob{}3\PYZcb{}}\PY{l+s+s1}{ to }\PY{l+s+si}{\PYZob{}4\PYZcb{}}\PY{l+s+s1}{.pdf}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{yname}\PY{p}{,}\PY{n}{xname}\PY{p}{,}\PY{n}{N\PYZus{}range}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{]}\PY{p}{,}\PY{n}{start\PYZus{}point}\PY{p}{,}\PY{n}{stop\PYZus{}point}\PY{p}{)}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Function to calculate the average of a thermodynamic variable}
+        \PY{k}{def} \PY{n+nf}{calculate\PYZus{}thermodynamic\PYZus{}variable}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{N\PYZus{}range}\PY{p}{,} \PY{n}{T\PYZus{}range}\PY{p}{,} \PY{n}{no\PYZus{}of\PYZus{}equilibrating\PYZus{}sweeps}\PY{p}{)}\PY{p}{:}
+            \PY{n}{var} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{N\PYZus{}range}\PY{p}{)}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{T\PYZus{}range}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            
+            \PY{k}{for} \PY{n}{N\PYZus{}index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{N\PYZus{}range}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{T\PYZus{}index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{T\PYZus{}range}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{var}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{n}{no\PYZus{}of\PYZus{}equilibrating\PYZus{}sweeps}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{n}{no\PYZus{}of\PYZus{}equilibrating\PYZus{}sweeps}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+                \PY{n}{var}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{normalize\PYZus{}data}\PY{p}{(}\PY{n}{var}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{n}{N\PYZus{}range}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{]}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{var}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Function to calculate the average of a derivative thermodynamic variable}
+        \PY{k}{def} \PY{n+nf}{calculate\PYZus{}derivative\PYZus{}thermodynamic\PYZus{}average}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{N\PYZus{}range}\PY{p}{,} \PY{n}{T\PYZus{}range}\PY{p}{,} \PY{n}{power\PYZus{}of\PYZus{}T}\PY{p}{,} \PY{n}{no\PYZus{}of\PYZus{}equilibrating\PYZus{}sweeps}\PY{p}{)}\PY{p}{:}
+            \PY{n}{var} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{N\PYZus{}range}\PY{p}{)}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{T\PYZus{}range}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            
+            \PY{k}{for} \PY{n}{N\PYZus{}index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{N\PYZus{}range}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{T\PYZus{}index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{T\PYZus{}range}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{ave} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{n}{no\PYZus{}of\PYZus{}equilibrating\PYZus{}sweeps}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{n}{no\PYZus{}of\PYZus{}equilibrating\PYZus{}sweeps}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{squared\PYZus{}ave} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{n}{no\PYZus{}of\PYZus{}equilibrating\PYZus{}sweeps}\PY{p}{:}\PY{p}{]}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{n}{no\PYZus{}of\PYZus{}equilibrating\PYZus{}sweeps}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{var}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{squared\PYZus{}ave}\PY{o}{\PYZhy{}}\PY{n}{ave}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{T\PYZus{}range}\PY{p}{[}\PY{n}{T\PYZus{}index}\PY{p}{]}\PY{o}{*}\PY{o}{*}\PY{n}{power\PYZus{}of\PYZus{}T}\PY{p}{)}
+                \PY{n}{var}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{normalize\PYZus{}data}\PY{p}{(}\PY{n}{var}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{n}{N\PYZus{}range}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{]}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{var}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Function to plot thermodynamic variable against temperature}
+        \PY{k}{def} \PY{n+nf}{plot\PYZus{}temperature\PYZus{}dependence}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{N\PYZus{}range}\PY{p}{,} \PY{n}{N\PYZus{}index\PYZus{}range}\PY{p}{,} \PY{n}{T\PYZus{}range}\PY{p}{,} \PY{n}{T\PYZus{}index\PYZus{}range}\PY{p}{,} \PY{n}{xname}\PY{p}{,} \PY{n}{yname}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{N\PYZus{}index} \PY{o+ow}{in} \PY{n}{N\PYZus{}index\PYZus{}range}\PY{p}{:}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{T\PYZus{}range}\PY{p}{[}\PY{n}{T\PYZus{}index\PYZus{}range}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:}\PY{p}{(}\PY{n}{T\PYZus{}index\PYZus{}range}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,}\PY{n}{data}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index\PYZus{}range}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:}\PY{p}{(}\PY{n}{T\PYZus{}index\PYZus{}range}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{N = }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{N\PYZus{}range}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} +1 to include last element}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{xname}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{n}{yname}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{plots/}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{ vs }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{ from }\PY{l+s+si}{\PYZob{}2:.3f\PYZcb{}}\PY{l+s+s1}{ to }\PY{l+s+si}{\PYZob{}3:.3f\PYZcb{}}\PY{l+s+s1}{.pdf}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{yname}\PY{p}{,}\PY{n}{xname}\PY{p}{,}\PY{n}{T\PYZus{}range}\PY{p}{[}\PY{n}{T\PYZus{}index\PYZus{}range}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{n}{T\PYZus{}range}\PY{p}{[}\PY{n}{T\PYZus{}index\PYZus{}range}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Function to calculate the autocorrelation of a variable}
+        \PY{k}{def} \PY{n+nf}{calculate\PYZus{}autocovariation}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{N\PYZus{}range}\PY{p}{,} \PY{n}{T\PYZus{}range}\PY{p}{,} \PY{n}{no\PYZus{}of\PYZus{}sweeps}\PY{p}{,} \PY{n}{no\PYZus{}of\PYZus{}equilibrating\PYZus{}sweeps}\PY{p}{)}\PY{p}{:}
+            \PY{n}{no\PYZus{}of\PYZus{}sampling\PYZus{}sweeps} \PY{o}{=} \PY{n}{no\PYZus{}of\PYZus{}sweeps}\PY{o}{\PYZhy{}}\PY{n}{no\PYZus{}of\PYZus{}equilibrating\PYZus{}sweeps}
+            \PY{n}{autocovariation} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{N\PYZus{}range}\PY{p}{)}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{T\PYZus{}range}\PY{p}{)}\PY{p}{,}\PY{n}{no\PYZus{}of\PYZus{}sampling\PYZus{}sweeps}\PY{p}{)}\PY{p}{)}
+            
+            \PY{k}{for} \PY{n}{N\PYZus{}index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{N\PYZus{}range}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{T\PYZus{}index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{T\PYZus{}range}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{ave} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{no\PYZus{}of\PYZus{}sampling\PYZus{}sweeps}
+                    \PY{k}{for} \PY{n}{tau} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{no\PYZus{}of\PYZus{}sampling\PYZus{}sweeps}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{autocorr} \PY{o}{=} \PY{l+m+mf}{0.0}
+                        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{no\PYZus{}of\PYZus{}equilibrating\PYZus{}sweeps}\PY{p}{,}\PY{n}{no\PYZus{}of\PYZus{}sweeps}\PY{o}{\PYZhy{}}\PY{n}{tau}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{autocorr} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{ave}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{n}{i}\PY{o}{+}\PY{n}{tau}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{ave}\PY{p}{)}
+                        \PY{n}{autocovariation}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{n}{tau}\PY{p}{]} \PY{o}{=} \PY{n}{autocorr}
+                    \PY{k}{if} \PY{n}{autocovariation}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                        \PY{n}{autocovariation}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{no\PYZus{}of\PYZus{}sampling\PYZus{}sweeps}\PY{p}{)}
+                    \PY{k}{else}\PY{p}{:}
+                        \PY{n}{autocovariation}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{autocovariation}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{/}\PY{n}{autocovariation}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+            
+            \PY{k}{return} \PY{n}{autocovariation}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Function of magnetisation near Tc}
+        \PY{k}{def} \PY{n+nf}{shape\PYZus{}function}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{Tc}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n}{a}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{Tc}\PY{o}{\PYZhy{}}\PY{n}{x}\PY{p}{)}\PY{o}{/}\PY{n}{Tc}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{n}{b}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Function to fit data}
+        \PY{k}{def} \PY{n+nf}{data\PYZus{}fitting}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{N\PYZus{}range}\PY{p}{,} \PY{n}{N\PYZus{}index\PYZus{}range}\PY{p}{,} \PY{n}{T\PYZus{}range}\PY{p}{,} \PY{n}{T\PYZus{}index\PYZus{}range}\PY{p}{,} \PY{n}{guess}\PY{p}{)}\PY{p}{:}
+            \PY{n}{x\PYZus{}data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{N\PYZus{}index\PYZus{}range}\PY{p}{)}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{T\PYZus{}index\PYZus{}range}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{n}{y\PYZus{}data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{N\PYZus{}index\PYZus{}range}\PY{p}{)}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{T\PYZus{}index\PYZus{}range}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} data sliced by N\PYZus{}index\PYZus{}range and T\PYZus{}index\PYZus{}range}
+            \PY{k}{for} \PY{n}{N\PYZus{}index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{N\PYZus{}index\PYZus{}range}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{T\PYZus{}index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{T\PYZus{}index\PYZus{}range}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{x\PYZus{}data}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{]} \PY{o}{=} \PY{n}{T\PYZus{}range}\PY{p}{[}\PY{n}{T\PYZus{}index\PYZus{}range}\PY{p}{[}\PY{n}{T\PYZus{}index}\PY{p}{]}\PY{p}{]}
+                    \PY{n}{y\PYZus{}data}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{n}{T\PYZus{}index}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{N\PYZus{}index\PYZus{}range}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{]}\PY{p}{,}\PY{n}{T\PYZus{}index\PYZus{}range}\PY{p}{[}\PY{n}{T\PYZus{}index}\PY{p}{]}\PY{p}{]}
+            
+            \PY{n}{params} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{N\PYZus{}index\PYZus{}range}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+            \PY{n}{errs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{N\PYZus{}index\PYZus{}range}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+            
+            \PY{k}{for} \PY{n}{N\PYZus{}index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{N\PYZus{}index\PYZus{}range}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{popt}\PY{p}{,} \PY{n}{pcov} \PY{o}{=} \PY{n}{optimize}\PY{o}{.}\PY{n}{curve\PYZus{}fit}\PY{p}{(}\PY{n}{shape\PYZus{}function}\PY{p}{,}\PY{n}{x\PYZus{}data}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{n}{y\PYZus{}data}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{n}{guess}\PY{p}{)}
+                \PY{n}{params}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{popt}
+                \PY{n}{errs}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{pcov}\PY{o}{.}\PY{n}{diagonal}\PY{p}{(}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{params}\PY{p}{,} \PY{n}{errs}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Set parameters and run the experiment!!!}
+        \PY{n}{Ns} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{]}
+        \PY{n}{J} \PY{o}{=} \PY{l+m+mf}{1.0}
+        \PY{n}{H} \PY{o}{=} \PY{l+m+mf}{0.0}
+        \PY{n}{Ts} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{1.8}\PY{p}{,}\PY{l+m+mf}{2.26}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{)}
+        \PY{n}{sweeps} \PY{o}{=} \PY{l+m+mi}{12000}
+        \PY{n}{equilibrating\PYZus{}sweeps} \PY{o}{=} \PY{l+m+mi}{2000}
+        
+        \PY{n}{magnetisation}\PY{p}{,} \PY{n}{energy}\PY{p}{,} \PY{n}{magnetisation\PYZus{}per\PYZus{}site}\PY{p}{,} \PY{n}{energy\PYZus{}per\PYZus{}site}\PY{p}{,} \PY{n}{run\PYZus{}time} \PY{o}{=} \PY{n}{Metropolis\PYZus{}algorithm}\PY{p}{(}\PY{n}{Ns}\PY{p}{,}\PY{n}{J}\PY{p}{,}\PY{n}{H}\PY{p}{,}\PY{n}{Ts}\PY{p}{,}\PY{n}{sweeps}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Plot time evolution}
+        \PY{n}{N\PYZus{}indices} \PY{o}{=} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Ns}\PY{p}{)}\PY{p}{)}
+        \PY{n}{T\PYZus{}indices} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{19}\PY{p}{,}\PY{l+m+mi}{39}\PY{p}{]}
+        \PY{n}{startpt} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{n}{stoppt} \PY{o}{=} \PY{n}{sweeps}
+        \PY{n}{plot\PYZus{}time\PYZus{}series}\PY{p}{(}\PY{n}{magnetisation\PYZus{}per\PYZus{}site}\PY{p}{,}\PY{n}{Ns}\PY{p}{,}\PY{n}{N\PYZus{}indices}\PY{p}{,}\PY{n}{Ts}\PY{p}{,}\PY{n}{T\PYZus{}indices}\PY{p}{,}\PY{n}{startpt}\PY{p}{,}\PY{n}{stoppt}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sweeps}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Magnetisation per site}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Plot run time vs N to investigate program complexity}
+        \PY{n}{run\PYZus{}time\PYZus{}data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Ns}\PY{p}{)}\PY{p}{)}
+        \PY{k}{for} \PY{n}{N\PYZus{}index} \PY{o+ow}{in} \PY{n}{N\PYZus{}indices}\PY{p}{:}
+            \PY{n}{run\PYZus{}time\PYZus{}data}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{average}\PY{p}{(}\PY{n}{run\PYZus{}time}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{Ns}\PY{p}{,}\PY{n}{run\PYZus{}time\PYZus{}data}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lattice size N}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Run time (s)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{plots/Run time vs Lattice size.pdf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} How total magnetisation fluctuates with time when system is in equilibrium}
+        \PY{n}{magnetisation\PYZus{}autocovariance} \PY{o}{=} \PY{n}{calculate\PYZus{}autocovariation}\PY{p}{(}\PY{n}{magnetisation}\PY{p}{,}\PY{n}{Ns}\PY{p}{,}\PY{n}{Ts}\PY{p}{,}\PY{n}{sweeps}\PY{p}{,}\PY{n}{equilibrating\PYZus{}sweeps}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Plot autocovariance of total magnetisation}
+        \PY{n}{N\PYZus{}indices} \PY{o}{=} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Ns}\PY{p}{)}\PY{p}{)}
+        \PY{n}{T\PYZus{}indices} \PY{o}{=} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{26}\PY{p}{,}\PY{l+m+mi}{31}\PY{p}{)}
+        \PY{n}{startpt} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{n}{stoppt} \PY{o}{=} \PY{n}{sweeps}
+        \PY{n}{plot\PYZus{}time\PYZus{}series}\PY{p}{(}\PY{n}{magnetisation\PYZus{}autocovariance}\PY{p}{,}\PY{n}{Ns}\PY{p}{,}\PY{n}{N\PYZus{}indices}\PY{p}{,}\PY{n}{Ts}\PY{p}{,}\PY{n}{T\PYZus{}indices}\PY{p}{,}\PY{n}{startpt}\PY{p}{,}\PY{n}{stoppt}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tau}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Autocorrelation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Calculate thermodynamic variables}
+        \PY{n}{average\PYZus{}magnetisation} \PY{o}{=} \PY{n}{calculate\PYZus{}thermodynamic\PYZus{}variable}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{magnetisation}\PY{p}{)}\PY{p}{,}\PY{n}{Ns}\PY{p}{,}\PY{n}{Ts}\PY{p}{,}\PY{n}{equilibrating\PYZus{}sweeps}\PY{p}{)}
+        \PY{n}{average\PYZus{}energy} \PY{o}{=} \PY{n}{calculate\PYZus{}thermodynamic\PYZus{}variable}\PY{p}{(}\PY{n}{energy}\PY{p}{,}\PY{n}{Ns}\PY{p}{,}\PY{n}{Ts}\PY{p}{,}\PY{n}{equilibrating\PYZus{}sweeps}\PY{p}{)}
+        \PY{n}{average\PYZus{}susceptibility} \PY{o}{=} \PY{n}{calculate\PYZus{}derivative\PYZus{}thermodynamic\PYZus{}average}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{magnetisation}\PY{p}{)}\PY{p}{,}\PY{n}{Ns}\PY{p}{,}\PY{n}{Ts}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{equilibrating\PYZus{}sweeps}\PY{p}{)}
+        \PY{n}{average\PYZus{}heat\PYZus{}capacity} \PY{o}{=} \PY{n}{calculate\PYZus{}derivative\PYZus{}thermodynamic\PYZus{}average}\PY{p}{(}\PY{n}{energy}\PY{p}{,}\PY{n}{Ns}\PY{p}{,}\PY{n}{Ts}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{equilibrating\PYZus{}sweeps}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Plot thermodynamic variables}
+        \PY{n}{N\PYZus{}indices} \PY{o}{=} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Ns}\PY{p}{)}\PY{p}{)}
+        \PY{n}{T\PYZus{}indices} \PY{o}{=} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Ts}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plot\PYZus{}temperature\PYZus{}dependence}\PY{p}{(}\PY{n}{average\PYZus{}magnetisation}\PY{p}{,}\PY{n}{Ns}\PY{p}{,}\PY{n}{N\PYZus{}indices}\PY{p}{,}\PY{n}{Ts}\PY{p}{,}\PY{n}{T\PYZus{}indices}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Magnetisation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plot\PYZus{}temperature\PYZus{}dependence}\PY{p}{(}\PY{n}{average\PYZus{}energy}\PY{p}{,}\PY{n}{Ns}\PY{p}{,}\PY{n}{N\PYZus{}indices}\PY{p}{,}\PY{n}{Ts}\PY{p}{,}\PY{n}{T\PYZus{}indices}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Energy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plot\PYZus{}temperature\PYZus{}dependence}\PY{p}{(}\PY{n}{average\PYZus{}susceptibility}\PY{p}{,}\PY{n}{Ns}\PY{p}{,}\PY{n}{N\PYZus{}indices}\PY{p}{,}\PY{n}{Ts}\PY{p}{,}\PY{n}{T\PYZus{}indices}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Susceptibility}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plot\PYZus{}temperature\PYZus{}dependence}\PY{p}{(}\PY{n}{average\PYZus{}heat\PYZus{}capacity}\PY{p}{,}\PY{n}{Ns}\PY{p}{,}\PY{n}{N\PYZus{}indices}\PY{p}{,}\PY{n}{Ts}\PY{p}{,}\PY{n}{T\PYZus{}indices}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Heat Capacity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Fit magnetisation}
+        \PY{n}{N\PYZus{}indices} \PY{o}{=} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Ns}\PY{p}{)}\PY{p}{)}
+        \PY{n}{T\PYZus{}indices} \PY{o}{=} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Ts}\PY{p}{)}\PY{p}{)}
+        \PY{n}{parameters}\PY{p}{,} \PY{n}{errors} \PY{o}{=} \PY{n}{data\PYZus{}fitting}\PY{p}{(}\PY{n}{average\PYZus{}magnetisation}\PY{p}{,}\PY{n}{Ns}\PY{p}{,}\PY{n}{N\PYZus{}indices}\PY{p}{,}\PY{n}{Ts}\PY{p}{,}\PY{n}{T\PYZus{}indices}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{,}\PY{l+m+mf}{2.269}\PY{p}{,}\PY{l+m+mf}{0.125}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{parameters}\PY{p}{,} \PY{n}{errors}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Plot fitted vs measured data}
+        \PY{k}{for} \PY{n}{N\PYZus{}index} \PY{o+ow}{in} \PY{n}{N\PYZus{}indices}\PY{p}{:}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{Ts}\PY{p}{[}\PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{n}{average\PYZus{}magnetisation}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{measured data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{Ts}\PY{p}{[}\PY{n}{T\PYZus{}indices}\PY{p}{]}\PY{p}{,}\PY{n}{shape\PYZus{}function}\PY{p}{(}\PY{n}{Ts}\PY{p}{[}\PY{n}{T\PYZus{}indices}\PY{p}{]}\PY{p}{,}\PY{n}{parameters}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{parameters}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{parameters}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fitted data, N = }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{, Tc = }\PY{l+s+si}{\PYZob{}1:.3f\PYZcb{}}\PY{l+s+s1}{, beta = }\PY{l+s+si}{\PYZob{}2:.3f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{Ns}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{]}\PY{p}{,}\PY{n}{parameters}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{parameters}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Magnetisation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{plots/Fitted vs Measured Magnetisation N = }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{.pdf}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{Ns}\PY{p}{[}\PY{n}{N\PYZus{}index}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
