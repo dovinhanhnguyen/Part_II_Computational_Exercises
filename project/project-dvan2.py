@@ -1,17 +1,16 @@
 
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 
 # Import modules
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import optimize
-import time
 
 
-# In[ ]:
+# In[2]:
 
 
 # Class representing a 2D Ising model
@@ -23,7 +22,7 @@ class Ising:
         self.H = H # external field
 
 
-# In[ ]:
+# In[3]:
 
 
 # Function to calculate energy change when spin(i,j) is flipped, assuming periodic boundary conditions
@@ -31,7 +30,7 @@ def energy_change_of_flip(state, pos_i, pos_j):
     return 2*state.lattice[pos_i,pos_j]*(state.J*(state.lattice[pos_i,(pos_j+1)%state.N] + state.lattice[(pos_i-1)%state.N,pos_j] + state.lattice[(pos_i+1)%state.N,pos_j] + state.lattice[pos_i,(pos_j-1)%state.N])+state.H)
 
 
-# In[ ]:
+# In[4]:
 
 
 # Monte Carlo sweep using Metropolis algorithm
@@ -79,7 +78,7 @@ def normalize_data(data, N):
     return data/(N**2)
 
 
-# In[ ]:
+# In[5]:
 
 
 # Metropolis algorithm
@@ -96,7 +95,6 @@ def Metropolis_algorithm(N_range, J, H, T_range, no_of_sweeps):
         for T_index in range(len(T_range)):
             state = Ising(N_range[N_index],J,H)
             
-            t0 = time.time()
             for sweep in range(no_of_sweeps): # run!
                 monte_carlo_sweep(state,T_range[T_index])
                 
@@ -107,8 +105,6 @@ def Metropolis_algorithm(N_range, J, H, T_range, no_of_sweeps):
                 
                 if sweep%1000 == 0: # output checkpoints
                     print('N = {0}, T = {1}, sweep = {2}'.format(N_range[N_index],T_range[T_index],sweep))
-            t1 = time.time()
-            run_time[N_index,T_index] = t1-t0
     
     return M, E, M_normalized, E_normalized, run_time
 
